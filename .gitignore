@@ -29,3 +29,6 @@
 
 #Qt
 moc*
+.qmake.stash
+.pro
+
