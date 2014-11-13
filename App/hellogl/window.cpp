@@ -100,7 +100,7 @@ Window::Window( kvs::qt::Application* app )
     mainLayout->addWidget( sliderRed, 2, 1, 1, 1 );
     mainLayout->addWidget( sliderGreen, 2, 2, 1, 1 );
     mainLayout->addWidget( sliderBlue, 2, 3, 1, 1 );
-    mainLayout->addWidget( text, 3, 0, 3, 1 );
+    // mainLayout->addWidget( text, 3, 0, 3, 1 );
     setLayout(mainLayout);
 
     m_screen->show();
@@ -123,6 +123,8 @@ void Window::keyPressEvent(QKeyEvent *event)
 {
     if( event->key() == kvs::Key::O )
         m_screen->openKVSMLFile();
+    if( event->key() == kvs::Key::Q )
+        qApp->quit();
     else
         QWidget::keyPressEvent(event);
 }

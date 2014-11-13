@@ -891,6 +891,7 @@ moc_kunscreen.cpp: ../../../../local/kvs1814/include/kvs/qt/Application \
 		../../../../local/kvs1814/include/Core/Visualization/Event/EventHandler.h \
 		../../../../local/kvs1814/include/kvs/TimeEvent \
 		../../../../local/kvs1814/include/Core/Visualization/Event/TimeEvent.h \
+		TransferFunctionEditor1D.h \
 		../../../../local/kvs1814/include/kvs/glut/TransferFunctionEditor \
 		../../../../local/kvs1814/include/SupportGLUT/Viewer/TransferFunctionEditor.h \
 		../../../../local/kvs1814/include/kvs/OpenGL \
@@ -1350,6 +1351,7 @@ moc_window.cpp: ../../../../local/kvs1814/include/kvs/qt/Application \
 		../../../../local/kvs1814/include/Core/Visualization/Event/EventHandler.h \
 		../../../../local/kvs1814/include/kvs/TimeEvent \
 		../../../../local/kvs1814/include/Core/Visualization/Event/TimeEvent.h \
+		TransferFunctionEditor1D.h \
 		../../../../local/kvs1814/include/kvs/glut/TransferFunctionEditor \
 		../../../../local/kvs1814/include/SupportGLUT/Viewer/TransferFunctionEditor.h \
 		../../../../local/kvs1814/include/kvs/OpenGL \
@@ -1421,7 +1423,6 @@ moc_window.cpp: ../../../../local/kvs1814/include/kvs/qt/Application \
 		../../../../local/kvs1814/include/Core/Visualization/Object/ImageObject.h \
 		../../../../local/kvs1814/include/kvs/FrequencyTable \
 		../../../../local/kvs1814/include/Core/Visualization/Mapper/FrequencyTable.h \
-		TransferFunctionEditor1D.h \
 		window.h
 	/Users/breeze/Qt5.3.2/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/breeze/Qt5.3.2/5.3/clang_64/mkspecs/macx-g++ -I/Users/breeze/Work/KunQt/App/hellogl -I/Users/breeze/local/kvs/include -I/opt/local/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Users/breeze/Qt5.3.2/5.3/clang_64/lib/QtOpenGL.framework/Headers -I/Users/breeze/Qt5.3.2/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/breeze/Qt5.3.2/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/breeze/Qt5.3.2/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/breeze/Qt5.3.2/5.3/clang_64/lib window.h -o moc_window.cpp
 
@@ -2316,6 +2317,7 @@ kunscreen.o: kunscreen.cpp kunscreen.h \
 		../../../../local/kvs1814/include/Core/Visualization/Event/EventHandler.h \
 		../../../../local/kvs1814/include/kvs/TimeEvent \
 		../../../../local/kvs1814/include/Core/Visualization/Event/TimeEvent.h \
+		TransferFunctionEditor1D.h \
 		../../../../local/kvs1814/include/kvs/glut/TransferFunctionEditor \
 		../../../../local/kvs1814/include/SupportGLUT/Viewer/TransferFunctionEditor.h \
 		../../../../local/kvs1814/include/kvs/OpenGL \
@@ -2891,6 +2893,7 @@ main.o: main.cpp ../../../../local/kvs1814/include/kvs/qt/Application \
 		../../../../local/kvs1814/include/Core/Visualization/Event/EventHandler.h \
 		../../../../local/kvs1814/include/kvs/TimeEvent \
 		../../../../local/kvs1814/include/Core/Visualization/Event/TimeEvent.h \
+		TransferFunctionEditor1D.h \
 		../../../../local/kvs1814/include/kvs/glut/TransferFunctionEditor \
 		../../../../local/kvs1814/include/SupportGLUT/Viewer/TransferFunctionEditor.h \
 		../../../../local/kvs1814/include/kvs/OpenGL \
@@ -2961,8 +2964,7 @@ main.o: main.cpp ../../../../local/kvs1814/include/kvs/qt/Application \
 		../../../../local/kvs1814/include/kvs/ImageObject \
 		../../../../local/kvs1814/include/Core/Visualization/Object/ImageObject.h \
 		../../../../local/kvs1814/include/kvs/FrequencyTable \
-		../../../../local/kvs1814/include/Core/Visualization/Mapper/FrequencyTable.h \
-		TransferFunctionEditor1D.h
+		../../../../local/kvs1814/include/Core/Visualization/Mapper/FrequencyTable.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 window.o: window.cpp /opt/local/include/GL/glew.h \
@@ -3475,6 +3477,7 @@ window.o: window.cpp /opt/local/include/GL/glew.h \
 		../../../../local/kvs1814/include/Core/Visualization/Event/EventHandler.h \
 		../../../../local/kvs1814/include/kvs/TimeEvent \
 		../../../../local/kvs1814/include/Core/Visualization/Event/TimeEvent.h \
+		TransferFunctionEditor1D.h \
 		../../../../local/kvs1814/include/kvs/glut/TransferFunctionEditor \
 		../../../../local/kvs1814/include/SupportGLUT/Viewer/TransferFunctionEditor.h \
 		../../../../local/kvs1814/include/kvs/OpenGL \
@@ -3546,7 +3549,6 @@ window.o: window.cpp /opt/local/include/GL/glew.h \
 		../../../../local/kvs1814/include/Core/Visualization/Object/ImageObject.h \
 		../../../../local/kvs1814/include/kvs/FrequencyTable \
 		../../../../local/kvs1814/include/Core/Visualization/Mapper/FrequencyTable.h \
-		TransferFunctionEditor1D.h \
 		../../../../local/kvs1814/include/kvs/HydrogenVolumeData \
 		../../../../local/kvs1814/include/Core/Visualization/Data/HydrogenVolumeData.h \
 		../../../../local/kvs1814/include/kvs/RayCastingRenderer \
