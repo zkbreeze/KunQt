@@ -34,11 +34,12 @@ Window::Window( kvs::qt::Application* app )
 {
     // Initial object and renderer
     kvs::StructuredVolumeObject* object = new kvs::HydrogenVolumeData( kvs::Vec3ui( 64, 64, 64 ) );
-    object->setName( "object" );
+    object->setName( "volume" );
     kvs::glsl::RayCastingRenderer* renderer = new kvs::glsl::RayCastingRenderer();
     renderer->setName( "renderer" );
     kvs::Bounds bound;
     kvs::LineObject* line = bound.outputLineObject( object );
+    line->setName( "line" );
 
     // Text Window
     QTextEdit* text = new QTextEdit;
@@ -74,8 +75,8 @@ Window::Window( kvs::qt::Application* app )
     QLabel* sliderGreen = new QLabel( "Slice_Y" );
     QLabel* sliderBlue = new QLabel( "Slice_Z" );
     QObject::connect(xSlider, SIGNAL(valueChanged(int)), m_screen, SLOT(drawSliceX(int)) );
-    QObject::connect(ySlider, SIGNAL(valueChanged(int)), m_screen, SLOT(setBackgroundColorGreen(int)));
-    QObject::connect(zSlider, SIGNAL(valueChanged(int)), m_screen, SLOT(setBackgroundColorBlue(int)));
+    QObject::connect(ySlider, SIGNAL(valueChanged(int)), m_screen, SLOT(drawSliceY(int)));
+    QObject::connect(zSlider, SIGNAL(valueChanged(int)), m_screen, SLOT(drawSliceZ(int)));
 
     // Buttons
     QPushButton* button1 = new QPushButton( "Open" );

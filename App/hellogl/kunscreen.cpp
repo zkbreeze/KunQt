@@ -131,26 +131,67 @@ void kunScreen::drawSliceX( int x )
 
 	kvs::PolygonRenderer* renderer = new kvs::PolygonRenderer();
 
-	std::string objectName = "object";
+	std::string objectName = "slice_x";
 	std::string rendererName = "renderer";
 
 	object->setName( objectName );
 	renderer->setName( rendererName );
 
-	this->scene()->replaceObject( objectName, object, false );
-	this->scene()->replaceRenderer( rendererName, renderer, false );
+	if( this->scene()->hasObject( "volume" ) ) this->scene()->replaceObject( "volume", object, false );
+	else if( !this->scene()->hasObject( objectName ) ) this->registerObject( object );
+	else if( this->scene()->hasObject( objectName ) ) this->scene()->replaceObject( objectName, object, false );
+	object->setXform( this->scene()->objectManager()->object( "line" )->xform() );
 
+	this->scene()->replaceRenderer( rendererName, renderer, true );
 	this->redraw();
 }
 
 void kunScreen::drawSliceY( int y )
 {
+	kvs::OrthoSlice::AlignedAxis a = kvs::OrthoSlice::YAxis;
+	float range = m_volume->maxObjectCoord().y() - m_volume->minObjectCoord().y();
+	float location = ( y / 255.0 ) * range + m_volume->minObjectCoord().y();
+	kvs::PolygonObject* object = new kvs::OrthoSlice( m_volume, location, a, m_editor_1d->transferFunction() );
 
+	kvs::PolygonRenderer* renderer = new kvs::PolygonRenderer();
+
+	std::string objectName = "slice_y";
+	std::string rendererName = "renderer";
+
+	object->setName( objectName );
+	renderer->setName( rendererName );
+
+	if( this->scene()->hasObject( "volume" ) ) this->scene()->replaceObject( "volume", object, false );
+	else if( !this->scene()->hasObject( objectName ) ) this->registerObject( object );
+	else if( this->scene()->hasObject( objectName ) ) this->scene()->replaceObject( objectName, object, false );
+	object->setXform( this->scene()->objectManager()->object( "line" )->xform() );
+
+	this->scene()->replaceRenderer( rendererName, renderer, true );
+	this->redraw();
 }
 
 void kunScreen::drawSliceZ( int z )
 {
+	kvs::OrthoSlice::AlignedAxis a = kvs::OrthoSlice::ZAxis;
+	float range = m_volume->maxObjectCoord().z() - m_volume->minObjectCoord().z();
+	float location = ( z / 255.0 ) * range + m_volume->minObjectCoord().z();
+	kvs::PolygonObject* object = new kvs::OrthoSlice( m_volume, location, a, m_editor_1d->transferFunction() );
 
+	kvs::PolygonRenderer* renderer = new kvs::PolygonRenderer();
+
+	std::string objectName = "slice_z";
+	std::string rendererName = "renderer";
+
+	object->setName( objectName );
+	renderer->setName( rendererName );
+
+	if( this->scene()->hasObject( "volume" ) ) this->scene()->replaceObject( "volume", object, false );
+	else if( !this->scene()->hasObject( objectName ) ) this->registerObject( object );
+	else if( this->scene()->hasObject( objectName ) ) this->scene()->replaceObject( objectName, object, false );
+	object->setXform( this->scene()->objectManager()->object( "line" )->xform() );
+
+	this->scene()->replaceRenderer( rendererName, renderer, true );
+	this->redraw();
 }
 
 std::string kunScreen::checkDataType( std::string filename )
