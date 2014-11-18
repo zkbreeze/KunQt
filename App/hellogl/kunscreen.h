@@ -12,6 +12,7 @@
 #include <kvs/qt/Application>
 #include <kvs/qt/Screen>
 #include "TransferFunctionEditor1D.h"
+#include <kvs/StructuredVolumeObject>
 
 namespace kun
 {
@@ -24,7 +25,8 @@ class kunScreen : public kvs::qt::Screen
 	unsigned char m_green;
 	unsigned char m_blue;
 
-	kun::TransferFunctionEditor1D* m_editor_1D;
+	kun::TransferFunctionEditor1D* m_editor_1d;
+	kvs::StructuredVolumeObject* m_volume;
 
 public:
 
@@ -32,7 +34,8 @@ public:
 	kunScreen( kvs::qt::Application* app ): kvs::qt::Screen( app ){};
 	~kunScreen(){};
 
-	void setTransferFunctionEditor1D( kun::TransferFunctionEditor1D* editor ){ m_editor_1D = editor; }
+	void setTransferFunctionEditor1D( kun::TransferFunctionEditor1D* editor ){ m_editor_1d = editor; }
+	void setBaseVolume( kvs::StructuredVolumeObject* volume ) { m_volume = volume; }
 
 public slots:
 	void setBackgroundColorRed( int red );
@@ -40,6 +43,9 @@ public slots:
 	void setBackgroundColorBlue( int blue );
 	void openKVSMLFile();
 	void chooseBackgroundColor();
+	void drawSliceX( int x );
+	void drawSliceY( int y );
+	void drawSliceZ( int z );
 
 private:
 	std::string checkDataType( std::string filename );

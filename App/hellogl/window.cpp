@@ -24,6 +24,8 @@
 #include <QString>
 #include <QListWidget>
 #include <kvs/TransferFunction>
+#include <kvs/Bounds>
+#include <kvs/LineObject>
 
 #include "kunscreen.h"
 
@@ -32,9 +34,11 @@ Window::Window( kvs::qt::Application* app )
 {
     // Initial object and renderer
     kvs::StructuredVolumeObject* object = new kvs::HydrogenVolumeData( kvs::Vec3ui( 64, 64, 64 ) );
-    object->setName( "Object" );
+    object->setName( "object" );
     kvs::glsl::RayCastingRenderer* renderer = new kvs::glsl::RayCastingRenderer();
     renderer->setName( "renderer" );
+    kvs::Bounds bound;
+    kvs::LineObject* line = bound.outputLineObject( object );
 
     // Text Window
     QTextEdit* text = new QTextEdit;
@@ -47,8 +51,10 @@ Window::Window( kvs::qt::Application* app )
     // Main rendering window
     m_screen = new kun::kunScreen( app );
     m_screen->registerObject( object, renderer );
+    m_screen->registerObject( line );
     m_screen->setMinimumSize( 512, 512 );
     m_screen->setBackgroundColor( kvs::RGBColor( 255, 255, 255 ) );
+    m_screen->setBaseVolume( object );
 
     // Transfer function editor 1D
     m_editor_1d = new kun::TransferFunctionEditor1D( m_screen );
@@ -64,10 +70,10 @@ Window::Window( kvs::qt::Application* app )
     xSlider->setValue( 255 );
     ySlider->setValue( 255 );
     zSlider->setValue( 255 );
-    QLabel* sliderRed = new QLabel( "BG_R" );
-    QLabel* sliderGreen = new QLabel( "BG_G" );
-    QLabel* sliderBlue = new QLabel( "BG_B" );
-    QObject::connect(xSlider, SIGNAL(valueChanged(int)), m_screen, SLOT(setBackgroundColorRed(int)) );
+    QLabel* sliderRed = new QLabel( "Slice_X" );
+    QLabel* sliderGreen = new QLabel( "Slice_Y" );
+    QLabel* sliderBlue = new QLabel( "Slice_Z" );
+    QObject::connect(xSlider, SIGNAL(valueChanged(int)), m_screen, SLOT(drawSliceX(int)) );
     QObject::connect(ySlider, SIGNAL(valueChanged(int)), m_screen, SLOT(setBackgroundColorGreen(int)));
     QObject::connect(zSlider, SIGNAL(valueChanged(int)), m_screen, SLOT(setBackgroundColorBlue(int)));
 

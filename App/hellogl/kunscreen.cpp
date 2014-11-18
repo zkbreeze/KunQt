@@ -30,6 +30,10 @@
 
 #include <QColorDialog>
 #include <QColor>
+#include <kvs/OrthoSlice>
+#include <kvs/PolygonObject>
+#include <kvs/transferFunction>
+#include <kvs/PolygonRenderer>
 
 namespace kun
 {
@@ -70,11 +74,11 @@ void kunScreen::openKVSMLFile()
 	if( !qFilename.isEmpty() )
 	{
 		std::string filename = qFilename.toStdString();
-		std::string objectName = "Object";
+		std::string objectName = "object";
 		std::string rendererName = "renderer";
 		std::string DataType = this->checkDataType( filename );
 
-		kvs::ObjectBase* object = NULL;
+		kvs::StructuredVolumeObject* object = NULL;
 		kvs::RendererBase* renderer = NULL;
 		if( DataType == "StructuredVolumeObject" )
 		{
@@ -82,22 +86,23 @@ void kunScreen::openKVSMLFile()
 			renderer = new kvs::glsl::RayCastingRenderer();
 			std::cout << "Input the Structured Volume Object." << std::endl;
 		}
-		if( DataType == "UnstructuredVolumeObject" )
-		{
-			object = new kvs::UnstructuredVolumeImporter( filename );
-			renderer = new kvs::StochasticTetrahedraRenderer();
-			std::cout << "Input the Unstructured Volume Object (only support tetrahedra data)." << std::endl;
-		}
-		if( DataType == "Point" )
-		{
-			object = new kvs::PointImporter( filename );
-			renderer = new kvs::PointRenderer();
-			std::cout << "Input the Point Object." << std::endl;
-		}
+		// if( DataType == "UnstructuredVolumeObject" )
+		// {
+		// 	object = new kvs::UnstructuredVolumeImporter( filename );
+		// 	renderer = new kvs::StochasticTetrahedraRenderer();
+		// 	std::cout << "Input the Unstructured Volume Object (only support tetrahedra data)." << std::endl;
+		// }
+		// if( DataType == "Point" )
+		// {
+		// 	object = new kvs::PointImporter( filename );
+		// 	renderer = new kvs::PointRenderer();
+		// 	std::cout << "Input the Point Object." << std::endl;
+		// }
 
 		object->setName( objectName );
 		renderer->setName( rendererName );
 
+		this->setBaseVolume( object );
 		this->scene()->replaceObject( objectName, object );
 		this->scene()->replaceRenderer( rendererName, renderer );
 		this->scene()->reset();
@@ -115,6 +120,37 @@ void kunScreen::chooseBackgroundColor()
 	QColor color = QColorDialog::getColor( color_origin, this, tr("Choose Background Color") );
 	this->setBackgroundColor( kvs::RGBColor( color.red(), color.green(), color.blue() ) );
 	this->redraw();
+}
+
+void kunScreen::drawSliceX( int x )
+{
+	kvs::OrthoSlice::AlignedAxis a = kvs::OrthoSlice::XAxis;
+	float range = m_volume->maxObjectCoord().x() - m_volume->minObjectCoord().x();
+	float location = ( x / 255.0 ) * range + m_volume->minObjectCoord().x();
+	kvs::PolygonObject* object = new kvs::OrthoSlice( m_volume, location, a, m_editor_1d->transferFunction() );
+
+	kvs::PolygonRenderer* renderer = new kvs::PolygonRenderer();
+
+	std::string objectName = "object";
+	std::string rendererName = "renderer";
+
+	object->setName( objectName );
+	renderer->setName( rendererName );
+
+	this->scene()->replaceObject( objectName, object, false );
+	this->scene()->replaceRenderer( rendererName, renderer, false );
+
+	this->redraw();
+}
+
+void kunScreen::drawSliceY( int y )
+{
+
+}
+
+void kunScreen::drawSliceZ( int z )
+{
+
 }
 
 std::string kunScreen::checkDataType( std::string filename )
