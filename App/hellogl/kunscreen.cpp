@@ -34,6 +34,8 @@
 #include <kvs/PolygonObject>
 #include <kvs/transferFunction>
 #include <kvs/PolygonRenderer>
+#include <kvs/Bounds>
+#include <kvs/LineObject>
 
 namespace kun
 {
@@ -74,7 +76,7 @@ void kunScreen::openKVSMLFile()
 	if( !qFilename.isEmpty() )
 	{
 		std::string filename = qFilename.toStdString();
-		std::string objectName = "object";
+		std::string objectName = "volume";
 		std::string rendererName = "renderer";
 		std::string DataType = this->checkDataType( filename );
 
@@ -102,9 +104,15 @@ void kunScreen::openKVSMLFile()
 		object->setName( objectName );
 		renderer->setName( rendererName );
 
+		kvs::Bounds bound;
+		kvs::LineObject* line = bound.outputLineObject( object );
+		std::string lineName = "line";
+		line->setName( lineName );
+
 		this->setBaseVolume( object );
 		this->scene()->replaceObject( objectName, object );
 		this->scene()->replaceRenderer( rendererName, renderer );
+		this->scene()->replaceObject( lineName, line );
 		this->scene()->reset();
 
 		this->redraw();

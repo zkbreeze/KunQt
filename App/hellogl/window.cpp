@@ -51,8 +51,8 @@ Window::Window( kvs::qt::Application* app )
 
     // Main rendering window
     m_screen = new kun::kunScreen( app );
-    m_screen->registerObject( object, renderer );
     m_screen->registerObject( line );
+    m_screen->registerObject( object, renderer );
     m_screen->setMinimumSize( 512, 512 );
     m_screen->setBackgroundColor( kvs::RGBColor( 255, 255, 255 ) );
     m_screen->setBaseVolume( object );
